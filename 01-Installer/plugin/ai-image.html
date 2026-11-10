@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>星屿 · AI 生图</title>
+    <link rel="stylesheet" href="./ai-workspace.css" />
+    <link rel="stylesheet" href="./ai-settings.css" />
+    <link rel="stylesheet" href="./anime-theme.css" />
+  </head>
+  <body class="anime-ai">
+    <nav class="page-tabs" aria-label="插件页面">
+      <a class="page-tab page-tab-link " href="./index.html">素材航站</a>
+      <a class="page-tab page-tab-link " href="./ai-expression.html">AI 生成表达式</a>
+      <a class="page-tab page-tab-link active" href="./ai-image.html">AI 生图</a>
+    </nav>
+    <header class="tool-header">
+      <div class="tool-brand">
+        <div class="tool-mark">✦</div>
+        <div><strong>AI 生图</strong><span>IMAGINATION / CANVAS</span></div>
+      </div>
+      <div class="service-controls">
+        <span id="serviceStatus" class="service-status checking"><i></i><span>正在检查本地服务</span></span>
+        <button id="checkServiceBtn" class="button secondary small" type="button">检测服务</button>
+      </div>
+    </header>
+
+<div class="module-status"><span id="globalStatus" class="global-status" role="status">本机独立保存 · v9.3.2 个人测试版</span><span>✧ 星屿创作空间</span></div><main class="tool-main">
+      <section id="free-image-view" class="tool-view active">
+        <div class="view-heading">
+          <div><p class="eyebrow">03 / DREAM CANVAS</p><h1>把想象，绘成一张画。</h1><p>写下灵感，放入参考，让下一帧在这里发生。</p></div><span class="anime-heading-stamp">✦ AI 生图</span>
+        </div>
+        <div class="free-image-workspace">
+          <section class="tool-panel free-image-input-panel">
+            <div class="panel-heading"><div><span class="section-kicker">01 / PROMPT</span><h2>生成描述</h2></div><span id="freeImageReferenceCount" class="count-label">0 张参考</span></div>
+            <div class="free-prompt-heading"><span class="small-note">单击填入 · 双击编辑 · 左上角删除</span><button id="saveFreeImagePromptBtn" class="button secondary small" type="button">＋ 新建预设</button></div>
+            <div id="freeImagePromptCards" class="free-prompt-cards" aria-label="生图提示词预设"></div>
+            <textarea id="freeImagePrompt" class="free-image-prompt" rows="4" maxlength="4000" aria-label="生图提示词" placeholder="输入画面描述，或点击上方预设后修改……"></textarea>
+            <div class="free-model-row"><label for="freeImageModel">生成模型</label><button id="refreshFreeModelsBtn" class="text-action" type="button">检测模型</button></div>
+            <select id="freeImageModel" aria-label="生成模型"><optgroup label="GPT 2.5 · 两个版本"><option value="gpt-image-2.5-sunburst">GPT Image 2.5 · Sunburst</option><option value="gpt-image-2.5-flare">GPT Image 2.5 · Flare</option></optgroup><optgroup label="Nano"><option value="gemini-nano-banana-2.1">Nano Banana 2.1</option></optgroup><optgroup label="原有模型"><option value="gpt-image-2">GPT Image 2</option></optgroup></select>
+            <div class="free-image-options"><label><span>画幅比例</span><select id="freeImageSize"><option value="1:1">1:1 方形</option><option value="16:9">16:9 横屏</option><option value="9:16">9:16 竖屏</option><option value="3:2">3:2 横版</option><option value="2:3">2:3 竖版</option><option value="4:3">4:3</option><option value="3:4">3:4</option><option value="4:5">4:5</option></select></label><label><span>分辨率</span><select id="freeImageResolution"><option value="1K">1K</option><option value="2K">2K</option><option value="4K">4K</option></select></label><label><span>数量</span><select id="freeImageCount"><option value="1">1 张</option><option value="2">2 张</option><option value="3">3 张</option><option value="4">4 张</option></select></label></div>
+            <p id="freeImageModelStatus" class="small-note" role="status">分辨率为目标档位，实际尺寸以模型返回为准。</p>
+            <button id="generateFreeImageBtn" class="button primary generate-button" type="button"><span class="button-symbol">✦</span>生成图片</button>
+            <div id="freeImageProgress" class="image-progress" hidden><div class="progress-copy"><strong id="freeImageProgressTitle">正在生成</strong><span id="freeImageProgressValue">已提交</span></div><div class="progress-track"><i id="freeImageProgressBar"></i></div></div>
+          </section>
+          <section class="tool-panel free-reference-panel">
+            <div class="panel-heading"><div><span class="section-kicker">02 / REFERENCES</span><h2>参考素材</h2></div><span class="small-note">可选，多张综合参考</span></div>
+            <div id="freeReferenceDrop" class="reference-drop" tabindex="0" role="button" aria-label="添加 AI 生图参考图，可拖拽或粘贴图片"><span class="drop-symbol">＋</span><strong>拖入图片 / Ctrl+V 粘贴</strong><small>也可点击选择图片；最多 8 张</small></div>
+            <div class="reference-actions free-reference-actions">
+              <button id="chooseFreeImagesBtn" class="button upload-local" type="button"><span class="upload-symbol" aria-hidden="true">＋</span><span>本地上传</span></button>
+              <button id="pasteFreeReferencesBtn" class="button upload-local" type="button"><span class="upload-symbol" aria-hidden="true">▣</span><span>粘贴图片</span></button>
+              <button id="useAESelectedBtn" class="button upload-ae" type="button"><span class="upload-symbol" aria-hidden="true">AE</span><span>选中素材</span></button>
+              <button id="useFreeAELayersBtn" class="button upload-ae" type="button" title="将时间轴选中图层在当前指针处单独导出为 PNG"><span class="upload-symbol" aria-hidden="true">▱</span><span>选中图层</span></button>
+              <button id="captureFreeFrameBtn" class="button upload-capture" type="button"><span class="upload-symbol" aria-hidden="true">◎</span><span>截取 AE 当前帧</span></button>
+            </div>
+            <div id="freeImageReferenceList" class="reference-list free-reference-list"></div>
+            <div class="free-reference-hint">支持 PNG、JPG、WEBP；可粘贴图片文件或截图。AE 图层按当前指针导出画面，素材读取本地图片路径。</div>
+          </section>
+          <section class="tool-panel free-results-panel">
+            <div class="panel-heading"><div><span class="section-kicker">03 / RESULTS</span><h2>生成结果</h2></div><button id="refreshFreeImagesBtn" class="icon-action" type="button" title="刷新结果" aria-label="刷新结果">↻</button></div>
+            <div class="result-toolbar" aria-label="AI 生图结果操作">
+              <button id="previewFreeImageBtn" class="button secondary small" type="button" disabled>预览</button>
+              <button id="openFreeImageBtn" class="button secondary small" type="button" disabled>打开图片</button>
+              <button id="deleteFreeImageBtn" class="button secondary small danger-text" type="button" disabled>删除</button>
+              <button id="openFreeImageFolderBtn" class="button secondary small" type="button">打开目录</button>
+              <button id="importFreeImageProjectBtn" class="button secondary small" type="button" title="仅导入 AE 项目面板" disabled>导入 AE</button>
+              <button id="importFreeImageBtn" class="button primary small" type="button" title="添加到当前合成，匹配尺寸并从时间指针开始" disabled>导入图层</button>
+              <button id="referenceFreeImageBtn" class="button secondary small reference-result-action" type="button" disabled>作为参考图</button>
+            </div>
+            <div class="result-gallery-heading"><span>单击选择 · 双击预览</span><div><button id="freeGalleryPrev" class="icon-action" type="button" aria-label="上一页生图结果">‹</button><span id="freeGalleryPage">0 / 0</span><button id="freeGalleryNext" class="icon-action" type="button" aria-label="下一页生图结果">›</button></div></div>
+            <div id="freeImageResultList" class="result-gallery" aria-label="AI 生图生成结果列表"></div>
+            <div id="freeImageEmpty" class="results-empty"><span class="empty-index">03</span><strong>生成结果会显示在这里</strong><small>填写提示词后开始生成</small></div>
+            <div id="freeImageResultDetail" class="free-image-result-detail" hidden><div class="free-image-preview"><img id="freeImagePreview" alt="AI 生图结果预览" /></div><div class="selected-image-info"><div><strong id="freeImageName"></strong><span id="freeImageDimensions"></span></div></div></div>
+            <div class="output-footer"><span id="freeImageSummary">0 张结果</span><span>仅显示本页生成结果</span></div>
+          </section>
+        </div>
+      </section>
+    </main>
+    <input id="freeImagePicker" type="file" accept="image/png,image/jpeg,image/webp" multiple hidden />
+    <div id="toolModal" class="modal-backdrop" hidden><section class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-heading"><h2 id="modalTitle">编辑</h2><button id="closeModalBtn" class="icon-action" type="button" title="关闭" aria-label="关闭">×</button></div><label class="field-label" for="modalName">名称</label><input id="modalName" type="text" maxlength="100" /><label class="field-label" for="modalText">内容</label><textarea id="modalText" rows="9"></textarea><div class="modal-actions"><button id="cancelModalBtn" class="button secondary" type="button">取消</button><button id="saveModalBtn" class="button primary" type="button">保存</button></div></section></div>
+    <div id="previewModal" class="preview-modal" role="dialog" aria-modal="true" aria-label="图片预览" hidden><button id="closePreviewBtn" class="icon-action" type="button" title="关闭预览（Esc）" aria-label="关闭预览">×</button><img id="previewModalImage" alt="图片预览" /><div id="previewStatus" class="preview-status" role="status" aria-live="polite"></div></div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="./lib/CSInterface.js"></script>
+    <script src="./ai-image.js"></script>
+    <script src="./ai-settings.js"></script>
+    <script src="./anime-shell.js"></script>
+  </body>
+</html>

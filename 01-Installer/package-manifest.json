@@ -1,0 +1,168 @@
+{
+  "format": 1,
+  "release": "v9.3.2-anime-20261026",
+  "nodeVersion": "v22.22.2",
+  "platform": "win32-x64",
+  "files": [
+    {
+      "path": "CODEX-INSTALL.md",
+      "sha256": "fa449b87788155738c301010c96ab5c7eb6278c934f97922a3b2bc04615fba4e",
+      "bytes": 773
+    },
+    {
+      "path": "install.cmd",
+      "sha256": "341b19e47b4275496a06fd555eb96b43095955c844e57e8fa5086984a415a434",
+      "bytes": 261
+    },
+    {
+      "path": "INSTALL.md",
+      "sha256": "3b268bcfa92bfa06aac4fa43898ed3153c468fee55400df5e736193a80bd67c9",
+      "bytes": 7304
+    },
+    {
+      "path": "install.ps1",
+      "sha256": "7afe578252bc7c1e792db4e32246934fc93809b25f9b1dafd4545b0ae11226aa",
+      "bytes": 9048
+    },
+    {
+      "path": "plugin/ai-expression.html",
+      "sha256": "99eb141e32c3a1fd0391610b4780cac3f1c9e2cd825020dcf2e2b38c1ec65267",
+      "bytes": 7579
+    },
+    {
+      "path": "plugin/ai-expression.js",
+      "sha256": "907483e2abd047aebf4a9f5cb78a2a94b538485d1d8ec1317287c39e9ec07e50",
+      "bytes": 38250
+    },
+    {
+      "path": "plugin/ai-image.html",
+      "sha256": "25818d1ecd02f292c4702005575ca1872da1d522ccf7f9faebffbc10566b040b",
+      "bytes": 10749
+    },
+    {
+      "path": "plugin/ai-image.js",
+      "sha256": "b423deb28f177158594e7e0962335f9b7586ba62a809ab5edea9918060f5316c",
+      "bytes": 49287
+    },
+    {
+      "path": "plugin/ai-service/ai-expression-service.js",
+      "sha256": "3bd1c5bdff66ea02717a544dd77e3ea59907a2e4a7656aee6089a4157eb10715",
+      "bytes": 30359
+    },
+    {
+      "path": "plugin/ai-service/config-store.js",
+      "sha256": "4844138183c5de6fb08ea46f42d9418922f9222a7be23b861bbac21df2cc2cbc",
+      "bytes": 5499
+    },
+    {
+      "path": "plugin/ai-service/free-image-options.js",
+      "sha256": "cd978e735d548b070757d1c48996253b6ebc823620f6d1bffaa3b82742527b52",
+      "bytes": 2319
+    },
+    {
+      "path": "plugin/ai-service/pandai-image-adapter.js",
+      "sha256": "e1ba86fbb3e2ecd440707b1b5f0af88e7f45dc0b74af54378d74393da1a0c56f",
+      "bytes": 3242
+    },
+    {
+      "path": "plugin/ai-service/protect-ai-keys.ps1",
+      "sha256": "8a8a423f20f1ca0f772ccffd40bcf7111a1f8857799ba188662005f41d03922d",
+      "bytes": 923
+    },
+    {
+      "path": "plugin/ai-service/start-ai-service.bat",
+      "sha256": "0dd9ab6529a328883ffd1fe706f8c8e9559556faf59605e4dfdfa818161a8a97",
+      "bytes": 351
+    },
+    {
+      "path": "plugin/ai-settings.css",
+      "sha256": "0fbce77ad66a9048a6d39ce4084929b5d501c824f997a31cea15bfe212cb6142",
+      "bytes": 2966
+    },
+    {
+      "path": "plugin/ai-settings.js",
+      "sha256": "3f2c4eecb7ab12e40c382aaa6e96e3168d1d5b4bc3a27989673f31be60ed7b73",
+      "bytes": 11352
+    },
+    {
+      "path": "plugin/ai-workspace.css",
+      "sha256": "ab6333ff829bfafff04c620720e04221f11fd703d998933ee644285fe7cc5b04",
+      "bytes": 33023
+    },
+    {
+      "path": "plugin/anime-shell.js",
+      "sha256": "1f0535a60a274201a17873fb0d3fd445678a1adaca15cafe60b73e7a5d049cac",
+      "bytes": 2068
+    },
+    {
+      "path": "plugin/anime-theme.css",
+      "sha256": "8279991dc8fcf603a7464962f2be632d11f2a9a03538243562e367084b09d82d",
+      "bytes": 26064
+    },
+    {
+      "path": "plugin/assets/star-guide.svg",
+      "sha256": "1da9b900dc5a553d3d0bc17cab2f2fe08af08ea8109d65d8f1f380e141dafd5f",
+      "bytes": 1045
+    },
+    {
+      "path": "plugin/CSXS/manifest.xml",
+      "sha256": "62809dd73622fa3bf1e7c63a0e67a6d4c0a7e22292fcb5b0ef0272bcba9a0857",
+      "bytes": 1691
+    },
+    {
+      "path": "plugin/data/ai-tools-default-expressions.json",
+      "sha256": "d8458796db051cb6c210099262d3293bebdfda8980c27fa0fe307d7ea007f72b",
+      "bytes": 4834
+    },
+    {
+      "path": "plugin/expression-layout.css",
+      "sha256": "9b6716f9154f119d4ae5f5905ed5f0ce47d7251e1f644acc918388537c1491c0",
+      "bytes": 8878
+    },
+    {
+      "path": "plugin/index.html",
+      "sha256": "f44ec90a562cb5965bec74b567407edaaf9c1c781bbe4c59c35d7c6966582057",
+      "bytes": 8255
+    },
+    {
+      "path": "plugin/jsx/host.jsx",
+      "sha256": "b6520ef02559be1eac7bb888ee3d3c722e1d71179b7791687fc551fd944a0451",
+      "bytes": 43978
+    },
+    {
+      "path": "plugin/lib/CSInterface.js",
+      "sha256": "57ddd0bc9bd09522a23a12fc0bc1b5ed95575efe9d3eeb2cdad6010ad50d2d57",
+      "bytes": 880
+    },
+    {
+      "path": "plugin/lib/read-reference-clipboard.ps1",
+      "sha256": "1bf8ebd87d91e7684a175640fb08f92c7ddcbc78f0c63f578a41f0b59b6fedeb",
+      "bytes": 1945
+    },
+    {
+      "path": "plugin/main.js",
+      "sha256": "b8caa17b5da6afd63e04eeaf81d3341c8f672679899745f3a797e340668b8c29",
+      "bytes": 79778
+    },
+    {
+      "path": "plugin/styles.css",
+      "sha256": "c9a0913fa63c215e0db2a2a28486d36d1e78a47fbb96a8545c04dcbe4b4bb7aa",
+      "bytes": 21173
+    },
+    {
+      "path": "runtime/node/LICENSE",
+      "sha256": "8cc9bb466b19fc7e7cc99d03e9df1132021fda8b01eea2624c58bb372dbef576",
+      "bytes": 148217
+    },
+    {
+      "path": "runtime/node/node.exe",
+      "sha256": "ae1a50511be58e987483fdbc12125407443926d2d394669ade2352776e920dd3",
+      "bytes": 87074816
+    },
+    {
+      "path": "VERSION.md",
+      "sha256": "586b0c4112ea272ca2b8b0d83cf6df036ca6815fd0f64c5e566a195a234ffab4",
+      "bytes": 2409
+    }
+  ]
+}

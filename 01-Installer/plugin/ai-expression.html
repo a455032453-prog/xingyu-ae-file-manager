@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>星屿 · AI 生成表达式</title>
+    <link rel="stylesheet" href="./ai-workspace.css" />
+    <link rel="stylesheet" href="./ai-settings.css" />
+    <link rel="stylesheet" href="./anime-theme.css" />
+    <link rel="stylesheet" href="./expression-layout.css" />
+  </head>
+  <body class="anime-ai anime-expression">
+    <nav class="page-tabs" aria-label="插件页面">
+      <a class="page-tab page-tab-link " href="./index.html">素材航站</a>
+      <a class="page-tab page-tab-link active" href="./ai-expression.html">AI 生成表达式</a>
+      <a class="page-tab page-tab-link " href="./ai-image.html">AI 生图</a>
+    </nav>
+    <header class="tool-header">
+      <div class="tool-brand">
+        <div class="tool-mark">✦</div>
+        <div><strong>AI 生成表达式</strong><span>MOTION / EXPRESSION</span></div>
+      </div>
+      <div class="service-controls">
+        <span id="serviceStatus" class="service-status checking"><i></i><span>正在检查本地服务</span></span>
+        <button id="checkServiceBtn" class="button secondary small" type="button">检测服务</button>
+      </div>
+    </header>
+
+<div class="module-status"><span id="globalStatus" class="global-status" role="status">本机独立保存 · v9.3.2 个人测试版</span><span>✧ 星屿创作空间</span></div>
+    <main class="tool-main">
+      <section id="expression-view" class="tool-view active">
+        <section class="tool-panel expression-library" aria-labelledby="libraryHeading">
+          <div class="expression-section-head">
+            <div><span class="section-kicker">01 / QUICK ACCESS</span><h1 id="libraryHeading">表达式库 <span id="expressionCount">0 条</span></h1></div>
+            <div class="expression-library-tools"><button id="newExpressionBtn" class="button secondary small" type="button">＋ 新建</button><button id="importExpressionsBtn" class="button secondary small" type="button">导入 JSON</button><button id="exportExpressionsBtn" class="button secondary small" type="button">导出 JSON</button><button id="expressionAiShortcutBtn" class="button secondary small" type="button">✦ 去生成</button></div>
+          </div>
+          <div class="expression-library-search"><div class="search-box"><span>⌕</span><input id="expressionSearch" type="search" placeholder="搜索已有表达式" autocomplete="off" /></div><div id="expressionFilters" class="filter-list" aria-label="按属性筛选"></div><label class="expression-size-control"><span>大小</span><input id="expressionSizeSlider" type="range" min="80" max="190" value="112" /><output id="expressionSizeValue">112px</output></label></div>
+          <div id="expressionList" class="expression-list" aria-label="表达式列表"></div>
+          <details id="expressionLibraryEditor" class="expression-library-editor">
+            <summary>编辑库中表达式 <span id="expressionEditorTitle">选择一条表达式</span><span id="expressionTypeBadge" class="type-badge">未选择</span></summary>
+            <div class="editor-fields">
+              <label><span>名称</span><input id="expressionName" type="text" maxlength="80" placeholder="表达式名称" /></label>
+              <label><span>目标属性</span><select id="expressionType"><option value="transform.opacity">不透明度</option><option value="transform.scale">缩放</option><option value="transform.rotation">旋转</option><option value="transform.position">位置</option><option value="transform.anchorPoint">锚点</option><option value="action">动作</option></select></label>
+              <label class="library-remark"><span>备注</span><input id="expressionRemark" type="text" maxlength="160" placeholder="简要说明" /></label>
+              <label class="code-field"><span>表达式代码</span><textarea id="expressionCode" spellcheck="false" placeholder="选择表达式后编辑，或新建一条"></textarea></label>
+            </div>
+            <div class="editor-actions"><button id="saveExpressionBtn" class="button primary small" type="button">保存到表达式库</button><button id="applyExpressionBtn" class="button secondary small" type="button">测试 / 应用</button><button id="extendCurrentExpressionBtn" class="button secondary small" type="button" disabled>基于此生成 3 个方案</button><span class="action-spacer"></span><button id="duplicateExpressionBtn" class="icon-action" type="button" title="复制表达式" aria-label="复制表达式">⧉</button><button id="moveExpressionUpBtn" class="icon-action" type="button" title="上移" aria-label="上移">↑</button><button id="moveExpressionDownBtn" class="icon-action" type="button" title="下移" aria-label="下移">↓</button><button id="deleteExpressionBtn" class="icon-action danger-text" type="button" title="删除表达式" aria-label="删除表达式">×</button></div>
+          </details>
+          <div id="expressionStatus" class="inline-status" role="status" aria-live="polite">点击“应用”快速调用；点击“修改”展开编辑器。</div>
+        </section>
+
+        <section class="tool-panel expression-ai-module" aria-labelledby="aiModuleHeading">
+          <div class="expression-section-head"><div><span class="section-kicker">02 / MOTION LAB</span><h2 id="aiModuleHeading">一个灵感，三种动法。</h2></div><span class="expression-three-tag">AI 生成表达式 · 3 个方案</span></div>
+          <div class="expression-compose">
+            <label class="expression-prompt-label" for="expressionAiPrompt">描述你想要的动效<textarea id="expressionAiPrompt" rows="2" maxlength="2000" placeholder="例如：图层从下方弹入，12 帧完成，带轻微回弹；给我三个不同节奏的实现。"></textarea></label>
+            <div class="expression-generate-row"><label><span>目标属性</span><select id="expressionAiType"><option value="transform.opacity">不透明度</option><option value="transform.scale">缩放</option><option value="transform.rotation">旋转</option><option value="transform.position">位置</option><option value="transform.anchorPoint">锚点</option></select></label><label><span>生成模型</span><select id="expressionAiModel"><option value="gpt-5.6">GPT-5.6</option><option value="gemini-3-pro">Gemini 3 Pro</option><option value="">当前服务模型</option></select></label><span class="expression-generate-note">分别编辑、测试，选中喜欢的保存。</span><button id="expressionAiGenerateBtn" class="button primary" type="button">✦ 生成 3 个表达式</button></div>
+          </div>
+          <div id="expressionAiStatus" class="expression-ai-status" role="status" aria-live="polite">填写动效描述，一次生成三个可编辑方案。</div>
+          <div id="expressionAiVariants" class="expression-ai-variants" aria-label="三个表达式结果窗口" aria-busy="false"></div>
+        </section>
+      </section>
+    </main>
+    <input id="expressionPicker" type="file" accept="application/json,.json" hidden />
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="./lib/CSInterface.js"></script>
+    <script src="./ai-expression.js"></script>
+    <script src="./ai-settings.js"></script>
+    <script src="./anime-shell.js"></script>
+  </body>
+</html>

@@ -1,0 +1,2 @@
+# Keep installer files byte-identical to package-manifest.json hashes.
+* -text

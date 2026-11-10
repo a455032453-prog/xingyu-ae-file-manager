@@ -1,0 +1,9 @@
+{
+  "version": "9.3.2",
+  "packagedOn": "2026-10-29",
+  "installerFiles": 32,
+  "pluginFiles": 25,
+  "runtimeUnchanged": true,
+  "includesCredentials": false,
+  "displayImages": "Actual UI with isolated sample data, not live AE or paid AI results"
+}

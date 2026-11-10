@@ -1,0 +1,72 @@
+[
+    {
+        "id": "opacity_fadein",
+        "name": "透明度—淡入",
+        "type": "transform.opacity",
+        "code": "transition = 5;\nif (marker.numKeys < 1) {\n    tSecs = transition/(1/thisComp.frameDuration);\n    linear(time, inPoint, inPoint + tSecs, 0, value);\n} else {\n    linear(time, marker.key(1).time, inPoint, 0, value);\n}",
+        "remark": "默认表达式"
+    },
+    {
+        "id": "opacity_fadeout",
+        "name": "透明度—淡出",
+        "type": "transform.opacity",
+        "code": "transition = 10;\nif (marker.numKeys < 1) {\n    tSecs = transition/(1/thisComp.frameDuration);\n    linear(time, outPoint - tSecs, outPoint, value, 0);\n} else {\n    linear(time, marker.key(1).time, outPoint, value, 0);\n}",
+        "remark": "默认表达式"
+    },
+    {
+        "id": "opacity_combo",
+        "name": "透明度—淡入出",
+        "type": "transform.opacity",
+        "code": "transition = 5;\nif (marker.numKeys < 2) {\n    tSecs = transition/(1/thisComp.frameDuration);\n    linear(time, inPoint, inPoint + tSecs, 0, value) - linear(time, outPoint - tSecs, outPoint, 0, value);\n} else {\n    linear(time, inPoint, marker.key(1).time, 0, value) - linear(time, marker.key(2).time, outPoint, 0, value);\n}",
+        "remark": "默认表达式"
+    },
+    {
+        "id": "scale_bouncein",
+        "name": "缩放—弹入",
+        "type": "transform.scale",
+        "code": "rate=1000;\nrampDur=0.1;\nfreq=3;\ndecay=15;\nw=freq*Math.PI*2;\nif(time<(inPoint+outPoint)/2){\n    if(time<(inPoint+rampDur)){\n        s=linear(time,inPoint,inPoint+rampDur,0,value[0]);\n    }else{\n        t=time-(inPoint+rampDur);\n        s=value[0]+rate*Math.sin(t*w)/Math.exp(t*decay)/w;\n    }\n}else{\n    s=value[0];\n}\n[s,s]",
+        "remark": "默认表达式"
+    },
+    {
+        "id": "scale_bounceout",
+        "name": "缩放—弹出",
+        "type": "transform.scale",
+        "code": "rate=1000;\nrampDur=0.1;\nfreq=3;\ndecay=15;\nw=freq*Math.PI*2;\nif(time<(inPoint+outPoint)/2){\n    s=value[0];\n}else{\n    if(time>(outPoint-rampDur)){\n        s=linear(time,outPoint-rampDur,outPoint,value[0],0);\n    }else{\n        t=(outPoint-rampDur)-time;\n        s=value[0]+rate*Math.sin(t*w)/Math.exp(t*decay)/w;\n    }\n}\n[s,s]",
+        "remark": "默认表达式"
+    },
+    {
+        "id": "scale_autoclick",
+        "name": "缩放—点击",
+        "type": "transform.scale",
+        "code": "n=0.1;\nif(marker.numKeys==0){\n    value;\n}else{\n    k=marker.nearestKey(time);\n    c=k.comment;\n    t=k.time;\n    a=easeIn(time,t-n,t,value,value*0.5);\n    b=easeOut(time,t,t+n,value*0.5,value);\n    if(c==\"\"){(time<t)?a:b;}else{\n        if(c%2==0){a;}else if(c%2==1){b;}else{(time<t)?a:b;}\n    }\n}",
+        "remark": "默认表达式"
+    },
+    {
+        "id": "rotation_shake",
+        "name": "旋转—点击抖动",
+        "type": "transform.rotation",
+        "code": "angle = 15;\nfreq = 3;\ndecay = 8;\nif(marker.numKeys == 0){\n    value;\n}else{\n    k = marker.nearestKey(time);\n    t = k.time;\n    if(time > t){\n        dt = time - t;\n        value + angle * Math.sin(dt * freq * Math.PI * 2) / Math.exp(dt * decay);\n    }else{\n        value;\n    }\n}",
+        "remark": "默认表达式"
+    },
+    {
+        "id": "anchorPoint_bounce",
+        "name": "锚点—Y轴弹性",
+        "type": "transform.anchorPoint",
+        "code": "// 基础参数设置\nbaseY = value[1];\namp = 50;\nfreq = 3;\ndecay = 3;\ndur = 0.5;\nif(marker.numKeys > 0){\n    k = marker.nearestKey(time);\n    if(k.time > time) {\n        [value[0], baseY];\n    } else {\n        t = k.time;\n        dt = time - t;\n        if(dt <= dur){\n            progress = dt/dur;\n            y = baseY + amp * (1 - Math.pow(1 - progress, 3));\n        } else {\n            elapsed = dt - dur;\n            y = baseY + amp * Math.sin(elapsed * freq * Math.PI * 2) / Math.exp(elapsed * decay);\n        }\n        [value[0], y];\n    }\n} else {\n    value;\n}",
+        "remark": "默认表达式"
+    },
+    {
+        "id": "move_5_frames",
+        "name": "→5帧",
+        "type": "action",
+        "code": "",
+        "remark": "移动时间指针"
+    },
+    {
+        "id": "position_bounce",
+        "name": "P-出现",
+        "type": "transform.position",
+        "code": "// 参数设置区域\ntriggerTime = 0;\njumpHeight = -90;\nstiffness = 6;\ndamping = 7;\nanimDuration = 1.5;\n\nt = time - triggerTime;\nif (t >= 0 && t <= animDuration) {\n    progress = t/animDuration;\n    oscillation = jumpHeight * Math.exp(-damping * progress) * Math.cos(stiffness * progress * Math.PI);\n    [value[0], value[1] + oscillation];\n} else {\n    value;\n}",
+        "remark": "默认表达式"
+    }
+]

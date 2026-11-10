@@ -1,0 +1,21 @@
+.afm-ai-settings-trigger { flex: 0 0 auto; height: 28px; min-height: 28px; width: auto; padding: 0 9px; margin-left: 6px; border: 1px solid #47765f; border-radius: 5px; background: #263d31; color: #c7efdb; font: 11px "Microsoft YaHei", sans-serif; cursor: pointer; white-space: nowrap; }
+.afm-ai-settings-overlay[hidden], .afm-ai-settings-dialog [hidden] { display: none !important; }
+.afm-ai-settings-overlay { position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 21000; padding: 12px; display: flex; align-items: center; justify-content: center; background: rgba(6,12,9,.86); box-sizing: border-box; }
+.afm-ai-settings-dialog { width: 470px; max-width: 100%; max-height: 94vh; display: flex; flex-direction: column; border: 1px solid #476252; border-radius: 10px; color: #e5f0e9; background: #202923; font: 12px/1.6 "Microsoft YaHei", sans-serif; text-align: left; box-sizing: border-box; overflow: hidden; }
+.afm-ai-settings-dialog header { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px 8px; flex: 0 0 auto; }
+.afm-ai-settings-dialog small { color: #82d6ae; font-size: 10px; }
+.afm-ai-settings-dialog h2 { margin: 3px 0 0; font-size: 18px; color: #eff8f2; }
+.afm-ai-settings-dialog h3 { margin: 0 0 4px; color: #b5dbca; font-size: 12px; }
+.afm-ai-settings-body { padding: 0 16px 12px; overflow: auto; min-height: 0; flex: 1 1 auto; }
+.afm-ai-settings-body p { margin: 5px 0 10px; font-size: 11px; color: #adbeb3; }
+.afm-ai-settings-dialog label { display: block; margin: 8px 0 4px; font-size: 11px; color: #c5d5cb; }
+.afm-ai-settings-dialog input[type="password"], .afm-ai-settings-dialog input[type="url"] { display: block; width: 100%; min-width: 0; height: 34px; padding: 0 9px; border: 1px solid #4b6053; border-radius: 5px; background: #151e19; color: #eaf5ee; box-sizing: border-box; font: 12px "Microsoft YaHei", sans-serif; }
+.afm-ai-settings-dialog input:focus, .afm-ai-settings-dialog button:focus { outline: 2px solid #77d6a6; outline-offset: 1px; }
+.afm-ai-settings-body .afm-ai-settings-note { margin: 12px 0 6px; font-size: 10px; color: #9aafa2; }
+.afm-ai-settings-status { padding: 8px; border-radius: 5px; color: #dfc895; background: #2c3025; font-size: 11px; overflow-wrap: break-word; }
+.afm-ai-settings-dialog footer { display: flex; justify-content: flex-end; padding: 10px 16px; border-top: 1px solid #3b4c40; flex: 0 0 auto; }
+.afm-ai-settings-dialog button { height: 32px; min-height: 32px; width: auto; padding: 0 12px; margin: 0 0 0 7px; border: 1px solid #4b6053; border-radius: 5px; background: #2c3b31; color: #dbe8df; font: 12px "Microsoft YaHei", sans-serif; cursor: pointer; }
+.afm-ai-settings-dialog #aiSettingsClose { width: 28px; padding: 0; font-size: 18px; }
+.afm-ai-settings-dialog #aiSettingsSave { color: #11281b; border-color: #63d59b; background: #63d59b; font-weight: 700; }
+.afm-ai-settings-dialog button:disabled { opacity: .55; cursor: wait; }
+

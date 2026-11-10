@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>星屿 File Manager · v9.3.2</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./ai-settings.css" />
+    <link rel="stylesheet" href="./anime-theme.css" />
+  </head>
+  <body class="anime-files">
+    <nav class="page-tabs" aria-label="插件页面">
+      <a class="page-tab page-tab-link active" href="./index.html">素材航站</a>
+      <a class="page-tab page-tab-link " href="./ai-expression.html">AI 生成表达式</a>
+      <a class="page-tab page-tab-link " href="./ai-image.html">AI 生图</a>
+    </nav>
+
+    <main id="fileManagerPage" class="app-shell page-view active">
+      <div class="station-toolbar">        <header class="topbar">
+          <button id="historyBackBtn" class="icon-btn" title="返回上一次访问" aria-label="返回上一次访问">↶</button>
+          <button id="backBtn" class="icon-btn" title="返回上一层" aria-label="返回上一层">↑</button>
+          <button id="refreshBtn" class="icon-btn" title="刷新" aria-label="刷新">↻</button>
+          <div class="path-box">
+            <input id="pathInput" spellcheck="false" autocomplete="off" placeholder="粘贴文件夹路径、文件路径，或拖入素材文件夹" />
+            <button id="pastePathBtn" title="粘贴路径">粘贴</button>
+            <button id="openPathBtn">打开</button>
+          </div>
+          <button id="revealBtn" class="ghost-btn">系统定位</button>
+        </header>
+
+
+        <div class="station-actions" aria-label="文件与 AE 操作">
+          <div class="action-group" role="group" aria-label="文件操作"><span class="action-label">文件</span>
+            <button id="copyBtn" title="复制选中的文件"><i aria-hidden="true">⧉</i>复制</button>
+            <button id="cutBtn" title="剪切选中的文件"><i aria-hidden="true">✂</i>剪切</button>
+            <button id="pasteBtn" title="粘贴到当前目录"><i aria-hidden="true">▣</i>粘贴</button>
+            <button id="newFolderBtn" title="新建文件夹"><i aria-hidden="true">＋</i>新建</button>
+          </div>
+          <div class="action-group import-group" role="group" aria-label="AE 导入">
+            <span class="action-label">导入</span>
+            <button id="importBtn" class="primary-btn" title="导入选中素材到 AE 项目"><i aria-hidden="true">↙</i>导入 AE <span id="importCount" class="mini-badge">0 项</span></button>
+            <button id="importLayerBtn" title="从当前指针导入图层并匹配合成">导入图层</button>
+            <button id="replaceLayerBtn" title="使用所选素材替换 AE 选中图层">替换图层</button>
+            <button id="importCompBtn" title="导入为合成">导入合成</button>
+            <button id="sendToFreeImageBtn" class="ai-reference-action" title="将选中的 PNG/JPG/WEBP 添加到 AI 生图参考"><i aria-hidden="true">✦</i>AI 参考</button>
+          </div>
+          <div class="action-group comp-group" role="group" aria-label="合成与工程">
+            <span class="action-label">AE</span>
+            <button id="captureFrameBtn" title="截取 AE 当前合成帧">◎ 截图</button>
+            <button id="locateAeItemBtn" title="定位 AE 选中素材的文件目录">定位素材</button>
+            <button id="organizeAssetsBtn" title="整理 AE 项目面板中的素材">整理素材</button>
+            <button id="duplicateCompBtn" title="复制当前合成">复制合成</button>
+            <button id="exportCompBtn" title="导出当前合成">导出</button>
+            <button id="collectCompBtn" title="收集整理当前合成">整理合成</button>
+            <button id="collectProjectBtn" title="收集整理当前工程">整理工程</button>
+          </div>
+        </div>
+        <div class="command-row"><label class="sequence-option" title="按连续编号图片序列导入"><input id="sequenceToggle" type="checkbox"><span>图片序列</span></label>
+          <div class="search-wrap">
+            <span>⌕</span>
+            <input id="searchInput" placeholder="搜索当前文件夹内可导入素材" autocomplete="off" />
+          </div>
+          <div class="segmented" role="group" aria-label="视图模式">
+            <button id="gridViewBtn" class="active" data-view="grid">缩略图</button>
+            <button id="listViewBtn" data-view="list">列表</button>
+          </div>
+          <label class="filter-toggle" title="开启后只显示 AE 可导入文件，文件夹和快捷方式仍可进入">
+            <input id="importFilterToggle" type="checkbox" />
+            <span>AE 素材</span>
+          </label>
+          <label class="thumb-size-control" title="调整缩略图大小，按住 Ctrl/Cmd 并滚动也可调整">
+            <span>缩略图</span>
+            <input id="thumbSizeSlider" type="range" min="96" max="220" step="8" />
+            <output id="thumbSizeValue">132</output>
+          </label>
+        </div>
+        <div id="clipState" class="toolbar-clipboard" role="status">未复制文件</div>
+</div>
+      <aside class="left-rail" aria-label="最近打开目录">
+        <header class="recent-heading"><div><small>RECENT / 轨迹</small><h1>最近打开目录</h1></div><button id="clearRecentBtn" class="recent-clear" title="清空最近目录">清空</button></header>
+        <div id="recentPaths" class="path-list" aria-label="最近目录列表"></div>
+      </aside>
+
+      <section class="workspace"><div class="station-heading"><div><small>01 / MATERIAL STATION</small><h2>素材航站 <span>每份素材，都有新故事。</span></h2></div><img src="./assets/star-guide.svg" alt="星屿领航员"></div>
+        <section class="content-area">
+          <div class="file-pane">
+            <div class="file-pane-head">
+              <div id="folderSummary">只显示文件夹、快捷方式和 AE 可导入素材</div>
+              <div id="selectionSummary">未选中</div>
+            </div>
+            <div id="dropHint" class="drop-hint">释放后打开此路径</div>
+            <div id="selectionMarquee" class="selection-marquee" hidden></div>
+            <div id="fileGrid" class="file-grid" tabindex="0" aria-label="文件列表"></div>
+          </div>
+
+          <aside class="preview-panel" aria-label="素材预览" hidden>
+            <section class="preview-card">
+              <div class="panel-head plain-head">
+                <span>预览</span>
+                <button id="openFileBtn" class="ghost-btn small">打开</button>
+              </div>
+              <div id="preview" class="preview empty">
+                <div class="empty-preview">
+                  <div class="preview-symbol">◇</div>
+                  <p>选择素材查看详情</p>
+                </div>
+              </div>
+              <div id="metaPanel" class="meta-panel"></div>
+              <div class="preview-actions">
+                <button id="previewImportBtn" class="primary-btn">导入 AE</button>
+                <button id="previewLayerBtn" class="primary-btn secondary-action" title="从当前指针导入图层并匹配合成">导入图层</button>
+              </div>
+            
+        </section>
+          </aside>
+
+        </section>
+
+
+      </section>
+    </main>
+
+    <div id="filePreviewOverlay" class="file-preview-overlay" hidden>
+      <button id="closeFilePreviewBtn" class="file-preview-close" title="关闭预览" aria-label="关闭预览">×</button>
+      <div id="filePreviewOverlayContent" class="file-preview-overlay-content"></div>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <div id="contextMenu" class="context-menu" hidden></div>
+
+    <script src="./lib/CSInterface.js"></script>
+    <script src="./main.js"></script>
+    <script src="./ai-settings.js"></script>
+    <script src="./anime-shell.js"></script>
+  </body>
+</html>
